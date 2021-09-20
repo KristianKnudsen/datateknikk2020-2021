@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="item1">
+    <div class="login hjemmeside">
+        <h1>Hjemmeside for {{current_user.alias}}: </h1>
+        <form action="{{ url_for('hjemmeside') }}" method="post">
+            {{ blogg_form.csrf_token}}
+            <p style="margin-bottom: 10px;"><b>Opprett blogg:</b></p>
+            {{ blogg_form.bloggnavn.label}}: {{ blogg_form.bloggnavn }}
+            <button>send</button>
+        </form>
+        <br>
+        <h1>Dine blogger: </h1>
+        <div class="dine-blogger">
+            {% for blogger in blogger %}
+                <button onclick="location.href=`{{ url_for('forside', blogg = blogger.bloggid) }}`" class="blogg-knapp">{{ blogger.bloggTittel }}</button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

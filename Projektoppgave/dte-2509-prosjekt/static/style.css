@@ -1,0 +1,602 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.material-icons {
+  color: #606060;
+}
+
+.header .material-icons:hover {
+  color: #1b66ca;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 15px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__left img {
+  width: 100px;
+  margin-left: 15px;
+}
+
+.header i {
+  padding: 0 7px;
+  cursor: pointer;
+}
+
+.header__search form {
+  border: 1px solid #ddd;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header__search input {
+  width: 500px;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  height: 100%;
+}
+
+.header__search button {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.header__search .top {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.oversikt {
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 100%;
+  padding: 15px 15px;
+  border-top: 1px solid #ddd;
+  overflow-y: scroll;
+}
+
+/*Inspirert av youtubes navbar*/
+/*https://dev.to/somanathgoudar/build-a-youtube-clone-with-just-html-css-for-complete-beginners-4fk1*/
+/*youtube.com*/
+
+.flash {
+  width: 400px;
+  background-color: darkgray;
+  height: auto;
+  padding: 10px;
+  transition-duration: 0.2s;
+  display: block;
+  border-radius: 5px;
+  margin: auto auto 15px;
+}
+
+.varsel {
+  background-color: #ffefbe;
+}
+
+.feil {
+  background-color: #ffd1c9;
+}
+
+.suksess {
+  background-color: #5cb85c;
+  transition-duration: 1.2s;
+}
+
+.innhold {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
+.item {
+  width: 640px;
+  margin-right: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.innlegg {
+  max-height: 400px;
+  min-height: 200px;
+  width: 640px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+}
+
+.innlegg:hover {
+  box-shadow: 0 0 0 1px #606060;
+}
+
+.innlegg img{
+  max-width: 100%;
+  max-height: 700px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.item2 {
+  width: 315px;
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.item2 img{
+  width: 315px;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+}
+
+@media (max-width: 983px) {
+  .item2 {
+    display: none;
+  }
+}
+
+.skille {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  height: 32px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  top: -42px;
+  text-align: center;
+  color: #787c7e;
+  pointer-events: none;
+}
+
+.gradient {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  top: -64px;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: rgb(3, 3, 3);
+}
+
+.mainBody {
+  height: calc(100vh - 70px);
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+@media (max-width: 425px) {
+  .header__search {
+    display: none;
+  }
+
+  .header__icons .material-icons {
+    display: none;
+  }
+
+  .header__icons .display-this {
+    display: inline;
+  }
+}
+
+@media (max-width: 848px) {
+  .header__search {
+    display: none;
+  }
+}
+
+@media (max-width: 983px) {
+  .header__search input {
+    width: 300px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #787c7e;
+}
+
+.blogginnhold {
+  color: #282828;
+  overflow-wrap: break-word;
+}
+
+.innhold_wrapper {
+  cursor: pointer;
+}
+
+.brukernavn:hover {
+  text-decoration: underline;
+}
+
+.brukernavn {
+  display: inline-block;
+}
+
+.tavle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.toppliste {
+  padding: 10px;
+  background-color: white;
+  width: 315px;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+}
+
+.info {
+  padding: 10px;
+  background-color: white;
+  width: 315px;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+}
+
+.info p {
+  color: #282828;
+  margin-bottom: 10px;
+}
+
+.topplisteelement {
+  margin-bottom: 10px;
+}
+
+.topplisteelement:hover {
+  text-decoration: underline;
+}
+
+.item1 {
+  margin-top: 5vh;
+  margin-bottom: auto;
+}
+
+.login {
+  width: 400px;
+  height: auto;
+  padding-bottom: 25px;
+  border-radius: 1.5em;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+  background-color: white;
+  text-align: center;
+}
+
+.login .tittel {
+  padding-top: 40px;
+  color: #4285F4;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.login .login-form {
+  padding-top: 40px;
+}
+
+.bn {
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.bn:focus, .pass:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.pass {
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.submit {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: #4285F4;
+  border: 0;
+  padding: 10px 40px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.submit:hover {
+  background-color: #1b66ca;
+}
+
+.reg {
+  color: #E1BEE7;
+  padding-top: 15px;
+}
+
+.reg:hover {
+  text-decoration: underline;
+}
+
+/*Login css kode hentet fra https://codepen.io/Devel0per95/pen/rjOpdx*/
+/*Open source av Khaled Mneimneh*/
+
+.inputfelt {
+  display: inline-block;
+}
+
+.inputfelt label {
+  display: block;
+  font-size: 12px;
+  color: #263238;
+}
+
+.item3 {
+  width: 750px;
+  align-items: flex-start;
+  overflow: hidden;
+  background-color: white;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+  padding: 10px;
+}
+
+.hele-innlegg img{
+  max-width: 100%;
+  max-height: 8000px;
+  display: block;
+  margin: 0 auto;
+}
+
+.hele-innlegg{
+  overflow-wrap: break-word;
+}
+
+.dynamiskknapp {
+  border-radius: 4px; float: right;
+}
+
+.nyKommentar input {
+  cursor: pointer;
+  border-radius: 4px;
+  color: #fff;
+  background: #606060;
+  border: 0;
+  padding: 10px 40px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.nyKommentar input:hover {
+  background-color: #1b66ca;
+}
+
+.nyKommentar textarea {
+  width: 100%;
+  height: 45px;
+  resize: none;
+}
+
+.slett:hover {
+  color: #ff0033;
+  cursor: pointer;
+}
+
+.underlinje:hover {
+  text-decoration: underline;
+}
+
+.topplisten {
+  background-color: white;
+  -webkit-box-shadow:0px 5px 5px #d9d9d9;
+  -moz-box-shadow:0px 5px 5px #d9d9d9;
+  box-shadow:0px 5px 5px #d9d9d9;
+}
+
+.opprettside {
+  text-align: center;
+}
+
+.icon_opprett {
+  cursor: pointer;
+}
+
+.icon_opprett:hover {
+  color: #1b66ca;
+}
+
+.bilde-felt {
+}
+
+.tekst-felt {
+  resize: vertical;
+  width: 70%;
+  height: 100px;
+  padding: 10px;
+}
+
+.aaa {
+  max-width: 100%;
+  height: auto;
+}
+
+.feltknapp {
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  background: #606060;
+  border: 0;
+  padding: 10px 40px;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.feltknapp:hover {
+  background-color: #1b66ca;
+}
+
+.lag-tittel {
+  margin-bottom: 10px;
+}
+
+.lag-tittel input {
+  width: 50%;
+  height: 30px;
+  font-size: 150%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.dropdown {
+  width: 150px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  background: #eee;
+}
+
+.send {
+  cursor: pointer;
+  border-radius: 5em;
+  padding: 10px 40px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  color: #4285F4;
+  border: 2px solid #4285F4;
+  transition-duration: 0.2s;
+}
+
+/*css for dropdown inspirert av Danield*/
+/*https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css*/
+/*https://codepen.io/danield770/pen/bgJOyV?editors=1100*/
+
+.sender:hover {
+  background-color: #4285F4;
+  color: white;
+}
+
+.avbryt {
+  color: #606060;
+  border: 2px solid #606060;
+}
+
+.avbryt:hover {
+  color: #ff0033;
+  border: 2px solid #ff0033;
+}
+
+.tag {
+  margin-bottom: 20px;
+}
+
+.tag input {
+  height: 25px;
+  padding: 4px;
+}
+
+.hjemmeside {
+  padding: 15px;
+}
+
+.blogg-knapp {
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  background: #606060;
+  border: 0;
+  padding: 10px 40px;
+  width: 100%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin-bottom: 10px;
+  transition-duration: 0.3s;
+}
+
+.blogg-knapp:hover {
+  padding: 20px;
+  background-color: #1b66ca;
+}
+
+
+/*css for dropdown inspirert av Danield*/
+/*https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css*/
+/*https://codepen.io/danield770/pen/bgJOyV?editors=1100*/
+
+/*Inspirert av youtubes navbar*/
+/*https://dev.to/somanathgoudar/build-a-youtube-clone-with-just-html-css-for-complete-beginners-4fk1*/
+/*youtube.com*/
+
+/*Login css kode hentet fra https://codepen.io/Devel0per95/pen/rjOpdx*/
+/*Open source av Khaled Mneimneh*/
+

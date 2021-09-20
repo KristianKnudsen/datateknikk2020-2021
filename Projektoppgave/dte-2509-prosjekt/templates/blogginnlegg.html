@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="item3">
+    {%if blogginnlegg %}
+    <h1>{{ blogginnlegg.tittel }}
+        {% if blogginnlegg.blogg_bruker_id == current_user.id%}
+        <button class="submit dynamiskknapp" onclick="document.location.href='{{url_for('rediger_innlegg', id = blogginnlegg.id)}}'">
+            Rediger
+        </button>
+        {% endif %}
+    </h1>
+    {% if blogginnlegg.blogg_bruker_id == current_user.id %}
+        <form action={{url_for("slett_innlegg")}} method="POST" onsubmit="return confirm('Er du sikker på at du vil slette dette innlegget?')">
+            {{ slett_innlegg_form.csrf_token }}
+            <input type="hidden" name="innlegg_id" value="{{ blogginnlegg.id }}" />
+            {{ slett_innlegg_form.submit(class_="send avbryt") }}
+        </form>
+    {% endif %}
+    <br>
+    <h4 style="color: #787c7e;"><a href="#kommentarer">{{ antall_kommentarer }} {{ antall_kommentarer_msg }}</a>
+        {{blogginnlegg.treff}} visninger</h4>
+    <h5>{{ blogginnlegg.dato_tidspunkt_opprettet }} av
+        <a href="{{ url_for('forside', bruker = blogginnlegg.blogg_bruker_id) }}" class="underlinje">
+            {{ blogginnlegg.bruker_alias }}
+        </a></h5>
+    <br>
+    <div class="hele-innlegg">
+        {{ blogginnlegg.tekst|safe }}
+    </div>
+    <p>
+        {% for tag in tags %}
+        <a href="{{ url_for('tag', tagid = tag.id) }}" class="underlinje">#{{ tag.navn }}</a>
+        {% endfor %}
+    </p>
+    <div id="kommentarer">
+        <h3>Kommentarfelt:</h3>
+        <br>
+        <div class="nyKommentar">
+            <h2>Legg til en kommentar</h2>
+            {%if current_user.is_authenticated %}
+            <form action="{{ url_for('forside')}}" method="post">
+                {{ kommentar_form.csrf_token }}
+                {{ kommentar_form.tekst }}<br>
+                {{ kommentar_form.submit() }}
+            </form>
+            {% else %}
+            Du må være pålogget for å kommentere
+            {% endif %}
+        </div>
+        <br>
+        {% for kommentar in kommentarer %}
+        <h4>
+            {% for bruker in brukere %}
+            {% if kommentar.bruker_id==bruker.id %}
+            <a class="underlinje" href="{{ url_for('forside', bruker = bruker.id) }}">{{ bruker.alias }}</a>
+            {% if current_user.id == kommentar.bruker_id or current_user.id == blogginnlegg.blogg_bruker_id %}
+                <form class="dynamiskknapp slett" action={{url_for("slett_kommentar")}} method="POST" onsubmit="return confirm('Er du sikker på at du vil slette denne kommentaren?')">
+                    {{ slett_kommentar_form.csrf_token }}
+                    <input type="hidden" name="kommentar_id" value="{{ kommentar.id }}" />
+                    {{ slett_kommentar_form.submit() }}
+                </form>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </h4>
+        <h5>{{ kommentar.dato_tid_opprettet }}</h5>
+        <p>{{ kommentar.tekst }}</p>
+        <br><hr><br>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

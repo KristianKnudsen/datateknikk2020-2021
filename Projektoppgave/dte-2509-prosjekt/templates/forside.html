@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="item">
+
+    <h1>Nyeste innlegg</h1>
+
+    {%if blogginnlegg %}
+        {% for blogginnlegg in blogginnlegg[:15] %}
+
+        <div class="innhold_wrapper"
+             onclick="window.location.href = `{{url_for('forside', blogginnlegg = blogginnlegg.id)}}`">
+
+        <div id="innlegg-{{loop.index}}"
+             class="innlegg">
+
+
+            <h1>{{ blogginnlegg.tittel }}</h1>
+                <a href ="{{url_for('forside', bruker = blogginnlegg.blogg_bruker_id)}}">
+                    <p class="brukernavn">av
+                        {% for bruker in brukere %}{% if blogginnlegg.blogg_bruker_id==bruker.id %}
+                        {{ bruker.alias }}
+                        {% endif %}{% endfor %}
+                    </p>
+                </a>
+            <p style="color: #787c7e;">{{ blogginnlegg.dato_tidspunkt_opprettet }}</p>
+            <br>
+            <div class="blogginnhold">
+                {{ blogginnlegg.tekst|safe }}
+            </div>
+        </div>
+
+        <div class="skille">
+            <p> {{antall_kommentarer[loop.index-1]}}
+                {%if antall_kommentarer[loop.index-1] != 1%}
+                    {% print("kommentarer") %}
+                {% else %}
+                    {% print("kommentar") %}
+                {% endif %}
+                | {{blogginnlegg.treff}} visninger</p>
+            <div id="gradient-{{loop.index}}" class="gradient"></div>
+        </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        window.addEventListener('load', gi_gradient);
+
+        function gi_gradient(){
+            let x = 1;
+            while ( document.getElementById(`innlegg-${x}`) != null ){
+                if ( document.getElementById(`innlegg-${x}`).offsetHeight < 375 ){
+                    document.getElementById(`gradient-${x}`).style.display = "none";
+                }
+                x++;
+            }
+        }
+    </script>
+    </div>
+
+              <div class="item2">
+                  <div class="tavle">
+                      <a href="{{url_for('forside')}}">
+                    <img title="Gå til forside" src="static/logo.png" alt=""/>
+                      </a>
+                    </div>
+                  <div class="tavle">
+                      <div class="toppliste">
+                      <h1>Topplisten</h1>
+
+                            {% for bruker in brukere_by_treff[:10] %}
+                          <div class="topplisteelement">
+                          <p style="float: left;"> {{loop.index}}.  </p>
+                          <p>
+                            <a href="{{url_for('forside', bruker = bruker.blogg_bruker_id)}}">
+                                {{ bruker.bruker_alias }} - {{ bruker.bruker_treff }} treff
+                            </a>
+                          </p>
+                              </div>
+                            {% endfor %}
+                          </div>
+                  </div>
+                  <div class="tavle">
+                      <div class="info">
+                          <h1>Info</h1>
+                          <p>Hjelp</p>
+                          <p>Retningslinjer</p>
+                          <p>Vilkår</p>
+                          <p>Personvern</p>
+                          <p>Kontakt oss</p>
+                      </div>
+                  </div>
+              </div>
+
+{% endblock %}

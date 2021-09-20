@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="item3">
+    <div class="opprettside">
+        <h1>Lager innlegg</h1>
+        <form method="post" action="{{ url_for('lagreInnlegg', _external=True)}}" enctype=multipart/form-data id="form">
+            {{ formk.csrf_token }}
+            <div class="editfield">
+                <div class="lag-tittel">
+                    {{ formk.tittel.label }}: {{ formk.tittel(maxlength="44") }}
+                </div>
+
+                <label for="bloggid">Velg en blogg:</label>
+                <select class="dropdown" name="bloggid" id="bloggid">
+                    {% for x in blogger %}
+                    {% if x.id == valgtblogg|int %}
+                    <option value="{{x.id}}" selected>{{x.blogg_tittel}}</option>
+                    {% else %}
+                    <option value="{{x.id}}">{{x.blogg_tittel}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+
+                <br><br>
+                <div id="inngangsfelt">
+                </div>
+                <br><br>
+                <button class="feltknapp" type="button" onclick="leggTilTekstFelt()">Legg til tekst</button>
+                <button class="feltknapp" type="button" onclick="leggTilBildeFelt()">Legg til Bilde</button>
+                <br><br>
+                <button type="button" onclick="vis_tag()" class="feltknapp">Legg til tag</button>
+                <br><br>
+                <div class="tag" style="display: none" id="divtag1">
+                    {{ formk.tag1.label }}: {{ formk.tag1 }}
+                    <a onclick="hide(this.parentNode)">
+                        <i title="Fjern tag"
+                           class="material-icons slett" style="vertical-align: middle;">cancel</i>
+                    </a>
+                </div>
+                <div class="tag" style="display: none" id="divtag2">
+                    {{ formk.tag2.label }}: {{ formk.tag2 }}
+                    <a onclick="hide(this.parentNode)">
+                        <i title="Fjern tag"
+                           class="material-icons slett" style="vertical-align: middle;">cancel</i>
+                    </a>
+                </div>
+                <div class="tag" style="display: none" id="divtag3">
+                    {{ formk.tag3.label }}: {{ formk.tag3 }}
+                    <a onclick="hide(this.parentNode)">
+                        <i title="Fjern tag"
+                           class="material-icons slett" style="vertical-align: middle;">cancel</i>
+                    </a>
+                </div>
+
+                <button class="send sender">Send</button>
+                <button onclick="location.href=`{{ url_for('forside')}}`" class="send avbryt" type="button">Avbryt</button>
+            </div>
+        </form>
+        <script src="{{url_for('static', filename='innlegg_oppretting.js')}}"></script>
+    </div>
+</div>
+{% endblock %}

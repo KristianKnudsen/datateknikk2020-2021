@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div>
+        {% if movies %}
+            {% for movies in movies %}
+
+                <ul>
+                    <li><a href="{{ url_for("hello") }}/{{ movies.id }}">{{ movies.title }} - {{ movies.director }}</a></li>
+                </ul>
+            {% endfor %}
+
+
+        {% else %}
+            <h1>{{ movie.title }}</h1>
+            <ul>
+                <li>Direktør: {{ movie.director }}</li>
+                <li>År: {{ movie.year }}</li>
+                <li>Url: {{ movie.url }}</li>
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}
+
+def update() -> 'html':
+    if request.method == "POST":
+
+        id = request.form['id']
+        title = request.form['title']
+        director = request.form['director']
+        year = request.form.get('year')
+        url = request.form.get('url')
+
+        with MovieRegister() as db:
+
+            # din kode her
+
+        return redirect('/')

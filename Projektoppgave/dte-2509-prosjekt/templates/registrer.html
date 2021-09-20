@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="item1">
+    <div class="login regf">
+        <p class="tittel">Lag ny bruker</p>
+        <form action="{{ url_for('registrer') }}" method="post" class="login-form">
+
+            {{ form.csrf_token }}
+
+            <div class="inputfelt">
+                <p style="color: #ff0033;">
+                    {% for error in form.brukernavn.errors %}{{ error }} {% endfor %}
+                </p>
+                {{form.brukernavn.label(style="display: none")}}
+                {{form.brukernavn(class="bn", placeholder="Brukernavn")}}
+
+            </div>
+
+            <div class="inputfelt">
+                <p style="color: #ff0033;">
+                    {% for error in form.epost.errors %}{{ error }} {% endfor %}
+                </p>
+                {{form.epost.label(style="display: none")}}
+                {{form.epost(class="bn", placeholder="E-post")}}
+            </div>
+
+            <div class="inputfelt">
+                <p style="color: #ff0033;">
+                    {% for error in form.passord.errors %}{{ error }} {% endfor %}
+                </p>
+                {{form.passord.label(style="display: none")}}
+                {{form.passord(class="pass", placeholder="Passord")}}
+            </div>
+
+            <div class="inputfelt">
+                {{form.bekreft.label(style="display: none")}}
+                {{form.bekreft(class="pass", placeholder="Gjenta passord")}}
+            </div>
+            <br>
+            {{ form.lovnad.label }}
+            {{ form.lovnad }}
+            <p style="color: #ff0033;">
+                {% for error in form.lovnad.errors %}{{ error }} {% endfor %}
+
+            </p>
+            <br>
+            <button class="submit">Registrer ny bruker</button>
+            <p class="reg"><a href="{{url_for('login')}}">Allerde bruker?</a></p>
+
+        </form>
+    </div>
+</div>
+<script src="{{url_for('static', filename='form_skript.js')}}"></script>
+
+{% endblock %}
+

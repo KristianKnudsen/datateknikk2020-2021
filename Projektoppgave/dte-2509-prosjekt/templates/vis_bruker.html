@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="item1">
+    <div class="login hjemmeside">
+        <h1>Viser blogger som tilhører {{ blogger[0].bloggeralias }}</h1>
+        <br>
+        <div class="dine-blogger">
+            {% for blogger in blogger %}
+                <button onclick="location.href=`{{ url_for('forside', blogg = blogger.bloggid) }}`" class="blogg-knapp">
+                    {{ blogger.bloggTittel }}</button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

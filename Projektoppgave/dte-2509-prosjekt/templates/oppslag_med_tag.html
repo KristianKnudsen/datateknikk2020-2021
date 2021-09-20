@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="item3">
+    <div class="opprettside">
+        <h2>Viser alle innlegg med taggen: {{ innleggene[0].tag }}</h2>
+        <div class="tagVis">
+            <table>
+                <thead>
+                <tr>
+                    <th>Tittel</th>
+                    <th>Bruker</th>
+                    <th>Treff</th>
+                    <th>Dato</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for innlegg in innleggene %}
+                <tr>
+                    <td class="underlinje"><a href="{{ url_for('forside', blogginnlegg = innlegg.id)}}">{{ innlegg.tittel }}</a></td>
+                    <td class="underlinje"><a href="{{ url_for('forside', bruker = innlegg.bruker_id)}}">{{ innlegg.brukernavn }}</a></td>
+                    <td>{{ innlegg.treff }}</td>
+                    <td>{{ innlegg.dato }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <form action="{{ url_for('tag') }}" method="POST" >
+               {{ sortering_form.csrf_token }}
+               {{ sortering_form.sortering }}
+               {{ sortering_form.submit() }}
+            <input type="hidden" name="tagid" value="{{ sortering_form.tagid }}"/>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

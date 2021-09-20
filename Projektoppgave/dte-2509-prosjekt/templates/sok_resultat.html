@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="item3">
+    <div class="opprettside">
+        {% if blogginnlegg %}
+        <h2>Viser søkeresultat for innlegg med {{ hva }} som inneholder: {{ tekst }} </h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Tittel</th>
+                <th>Bruker</th>
+                <th>Treff</th>
+                <th>Dato</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for blogginnlegg in blogginnlegg %}
+            <tr>
+
+                <td class="underlinje"><a href="{{ url_for('forside', blogginnlegg = blogginnlegg.id)}}">{{ blogginnlegg.tittel }}</a></td>
+                <td class="underlinje"><a href="{{ url_for('forside', bruker = blogginnlegg.brukerid)}}">{{ blogginnlegg.alias }}</a></td>
+
+                <td>{{ blogginnlegg.treff }}</td>
+                <td>{{ blogginnlegg.dato }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% elif blogginnlegg_m_tag %}
+        <div class="searchresult">
+            <h2>Viser søkeresultat for innlegg med {{ hva }} som inneholder: {{ tekst }} </h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tittel</th>
+                    <th>Bruker</th>
+                    <th>Treff</th>
+                    <th>Dato</th>
+                    <th>Tag</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for blogginnlegg_m_tag in blogginnlegg_m_tag %}
+                <tr>
+                    <td class="underlinje"><a href="{{ url_for('forside', blogginnlegg = blogginnlegg_m_tag.id)}}">{{ blogginnlegg_m_tag.tittel }}</a></td>
+                    <td class="underlinje"><a href="{{ url_for('forside', bruker = blogginnlegg_m_tag.bruker_id)}}">{{ blogginnlegg_m_tag.brukernavn }}</a></td>
+                    <td>{{ blogginnlegg_m_tag.treff }}</td>
+                    <td>{{ blogginnlegg_m_tag.dato }}</td>
+                    <td class="underlinje"><a href="{{ url_for('tag', tagid = blogginnlegg_m_tag.tagid)}}">{{ blogginnlegg_m_tag.tagnavn }}</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        {% elif bruker %}
+        <div class="visBruker">
+            <h2>Viser brukere med {{ hva }} som inneholder: {{ tekst }} </h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Brukernavn</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bruker in bruker %}
+                <tr>
+                    <td class="underlinje"><a href="{{ url_for('forside', bruker = bruker.brukerid)}}">{{ bruker.alias }}</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

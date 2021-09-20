@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="item1">
+    <div class="login" style="padding-top: 25px">
+        <h1>Topp brukere</h1>
+
+        {% for bruker in brukereByTreff[:50] %}
+        <a href="{{url_for('forside', bruker = bruker.blogg_bruker_id)}}">
+
+            <p style="color: black; float: left">{{loop.index}}.</p>
+            <p class="underlinje">{{ bruker.bruker_alias }} Treff: {{ bruker.bruker_treff }}</p>
+        </a>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

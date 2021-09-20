@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class ="item3">
+    <div class="opprettside">
+        <h1>Redigerer innlegg</h1>
+        <form method="post" action="{{ url_for('lagreRedigering', _external=True) }}" enctype=multipart/form-data id="form">
+            {{ hoved_form.csrf_token }}
+            {{ hoved_form.id }}
+            <div class="editfield">
+                <div class="lag-tittel">
+                    {{ hoved_form.tittel.label }}: {{ hoved_form.tittel }}
+                </div>
+                <br><br>
+                <div id="inngangsfelt">
+                </div>
+                <br>
+                <button type="button" class="feltknapp" onclick="leggTilTekstFelt()">Legg til tekst</button>
+                <button type="button" class="feltknapp" onclick="leggTilBildeFelt()">Legg til Bilde</button>
+                <br><br>
+                <button class="send sender">Send</button>
+                <button onclick="location.href=`{{ url_for('forside')}}`" class="send avbryt" type="button">Avbryt</button>
+            </div>
+        </form>
+        <script src="{{url_for('static', filename='innlegg_oppretting.js')}}"></script>
+        <script>
+
+            let t = {{ innlegg.tittel|tojson }};
+            let rekkefolge = {{rekkefolge|tojson}};
+            let innhold = {{innhold|tojson}};
+            let innlegg_id = {{ innlegg.id }};
+            innlegg_id = innlegg_id.toString();
+
+            document.getElementById("tittel").value = t;
+            document.getElementById("id").value = innlegg_id;
+
+            for (let i = 0; i < rekkefolge.length; i++){
+                if( rekkefolge[i] === 'bilde' ){
+                    leggTilBildeUuid(innhold[i]);
+                } else if( rekkefolge[i] === 'tekst' ){
+                    leggTilTekstData(innhold[i]);
+                }
+            }
+        </script>
+    </div>
+</div>
+{% endblock %}
